@@ -7,7 +7,7 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,187 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>O que é ? </h1>
+					<cite>
+						<em>
+						"Em ciência da computação, programação funcional é um paradigma de programação que trata a computação como uma avaliação
+						de funções matemáticas e que evita estados ou dados mutáveis. Ela enfatiza a aplicação de funções, em contraste da programação
+						imperativa, que enfatiza mudanças no estado do programa"</em>
+					</cite>
+					<small>https://pt.wikipedia.org/wiki/Programação_funcional</small>
+				</section>
+				
+				<section>
+					<h2>$f(x) = x^2 + 5$</h2>
+						<aside class="notes">
+							 Por exemplo, a função f(x) = x^2 é definida utilizando função de potência. Do mesmo modo, a linguagem deve
+							oferecer funções básicas que não requer definições adicionais.
+						</aside>
+				</section>
+				<section>
+					<section>
+						<h2>Linguagens Funcionais </h2>
+						<ul>
+							<li class="fragment">Erlang;</li>
+							<li class="fragment">F#;</li>
+							<li class="fragment">Haskell;</li>
+							<li class="fragment">Lisp;</li>
+							<li class="fragment">OCaml;</li>
+							<li class="fragment">R;</li>
+							<li class="fragment">Scala;</li>
+							<li class="fragment">Scheme.</li>
+						</ul>
+					</section>
+					<section>
+						<h1>CADE O JS???</h1>
+						<p class="fragment">O Javascript não é uma linguagem puramente funcional, portanto a implementação fica por conta do <strong>Desenvolvedor</strong></p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Vantagens</h2>
+						<ul>
+							<li class="fragment">Isso vai mudar a sua vida </li>
+							<li class="fragment">Reuso de código</li>
+							<li class="fragment">Menor Tempo</li>
+							<li class="fragment">Menos bugs</li>
+							<li class="fragment">Mais facil de ler e interpretar</li>
+							<li class="fragment">Criar testes unitário será algo muito mais simples</li>
+							<li class="fragment">Você sentir seguro com a qualidade do que está sendo feito</li>
+						</ul>
+					</section>
+					<section>
+						<iframe src="https://giphy.com/embed/26ufdipQqU2lhNA4g" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+						<p>
+							<a href="https://giphy.com/gifs/producthunt-mind-blown-blow-your-26ufdipQqU2lhNA4g">via GIPHY</a>
+						</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Princípios</h1>
+					</section>
+					<section>
+						<h3>Funções são valores</h3>
+						<ul>
+							<li>Podem ser atribuidas a variáveis ou passadas para outras funções</li>
+						</ul>
+							<pre><code data-trim data-noescape>
+								function square(number) {
+									return number * number;
+								}
+							</code></pre>
+							<pre><code data-trim data-noescape>
+								//função anonima atribuida a uma variável	
+								var square = function (number) {
+									return number * number
+								}
+								var elevate = square
+								elevate(9) // 81
+							</code></pre>
+							<aside class="notes">
+								Nesta parte irei mostrar a syntax mais simples possível, ou a que estamos mais abituados. 
+							</aside>
+					</section>
+					<section>
+						<h3>Higher-Order Functions</h3>
+						<p>Funções que operam sobre outras funções, ou recebe como parametros ou retorna uma função</p>
+						<pre><code data-trim data-noescape>
+							var calculate = function(fn, x, y) {
+								return fn(x, y);
+							};
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							var sum = function(x, y) {
+								return x + y;
+							};
+
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							var mult = function(x, y) {
+								return x * y;
+							};
+						</code></pre>
+						<pre><code data-trim data-noescape>
+							calculate(sum, 2, 5); // 7
+							calculate(mult, 2, 5); // 10
+						</code></pre>
+						<aside class="notes">
+							 A função calculate recebe três parâmetros. O primeiro é uma função qualquer que será invocada passando como parâmetro x
+							e y.
+						</aside>
+					</section>
+					
+						
+					
+					<section>
+						<h3>Imutabilidade</h3>
+						<p>Funções puras tratam só e apenas o seu escopo. Não produzindo side-effects </p>
+						<pre><code data-trim data-noescape>
+							function square(x) {
+								return x * x;
+							}
+							square(2); // 4
+						</code></pre>
+						<aside class="notes">
+							 Ela recebe como parâmetro uma variável x e retorna um int que é a multiplicação de x com ele mesmo.
+						</aside>
+						<pre><code data-trim data-noescape>
+							// Função Impura
+							function generateDate() {
+								var date = new Date();
+								generate(date);
+							}
+							generateDate(); // ???
+						</code></pre>
+						<aside class="notes">
+							 Ela não recebe nada como parâmetro e retorna o que parece ser uma data processada mas não temos como ter certeza.
+						</aside>
+					</section>
+					<section>
+						<h3>Outro Exemplo</h3>
+						
+						<pre><code data-trim data-noescape>
+							function checkUnavailable(skuObj){
+								if(!skuObj.available){
+									$body.addClass("unavailable");
+								} else {
+									$body.removeClass("unavailable");
+								}
+							}
+						</code></pre>
+						<aside class="notes">
+							<p>Exemplo de uma função sem retorno e que causa Side Effect (var $body)</p>
+							<p>Este código não deve ser julgado por ninguém</p>
+						</aside>
+					</section>
+				</section>
+				<section>
+					$f(JS)$ <br>
+					(Teste unitário de Bonus)
+				</section>
+				<section>
+					<pre><code data-trim data-noescape>
+						// usando a lib mocha https://mochajs.org
+						function square(number) {
+							return number * number;
+						}
+						var assert = require('assert');
+						describe('Meu primeiro teste', function () {
+							describe('square(number)', function () {
+								it('deve retornar o quadrado de de 9, que é 81', function () {
+									assert.equal(square(9), 81);
+								});
+							});
+						});
+					</code></pre>
+					<img src="images/mocha.png">
+				</section>
+				<section>
+					<h1>Conceitos</h1>
+				</section>
 			</div>
 		</div>
 
@@ -37,7 +216,13 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				history: true,
+				math: {
+					mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+					config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+				},
 				dependencies: [
+					{ src: 'plugin/math/math.js', async: true },
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
